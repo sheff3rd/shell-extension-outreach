@@ -1,0 +1,24 @@
+.Form {
+  display: flex;
+  font-size: 16px;
+  justify-content: space-around;
+  width: 680px;
+}
+
+.Select,
+.Input,
+.Button {
+  margin: auto;
+}
+
+.Select {
+  width: 100px;
+}
+
+.Iframe {
+  position: absolute;
+  top: 215px;
+  left: 10%;
+  width: 80%;
+  height: 33%;
+}
