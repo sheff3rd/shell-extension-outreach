@@ -6,11 +6,9 @@ const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMi
 const ignoredFiles = require('react-dev-utils/ignoredFiles');
 const redirectServedPath = require('react-dev-utils/redirectServedPathMiddleware');
 const paths = require('./paths');
-const getHttpsConfig = require('./getHttpsConfig');
 
-const host = process.env.HOST || '0.0.0.0';
 const sockHost = process.env.WDS_SOCKET_HOST;
-const sockPath = process.env.WDS_SOCKET_PATH; // default: '/ws'
+const sockPath = process.env.WDS_SOCKET_PATH;
 const sockPort = process.env.WDS_SOCKET_PORT;
 
 module.exports = function (proxy, allowedHost) {
@@ -91,8 +89,12 @@ module.exports = function (proxy, allowedHost) {
       publicPath: paths.publicUrlOrPath.slice(0, -1),
     },
 
-    https: getHttpsConfig(),
-    host,
+    https: {
+      key: fs.readFileSync('./config/localhost.key'),
+      cert: fs.readFileSync('./config/localhost.crt'),
+    },
+    host: 'extension.outreach-dev.com',
+
     historyApiFallback: {
       // Paths with dots should still use the history fallback.
       // See https://github.com/facebook/create-react-app/issues/387.
