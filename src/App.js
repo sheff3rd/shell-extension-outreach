@@ -1,5 +1,5 @@
 import React from 'react'
-import Navigation from './Navigation'
+import Navigation from './components/Navigation'
 
 import logo from './logo.svg'
 import './App.css'

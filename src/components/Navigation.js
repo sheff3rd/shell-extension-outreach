@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import extensibilitySdk from '@getoutreach/extensibility-sdk'
+import extensibilitySdk, { NavigationDestination } from '@getoutreach/extensibility-sdk'
 
 const Navigation = () => {
   const context = useRef(null)
@@ -16,14 +16,17 @@ const Navigation = () => {
   const handleRedirect = path => async () => {
     if (!context.current) return null
 
-    const { navigateTo } = context.current
-    await navigateTo(path)
+    const prospectId = context.current.prospect.id
+
+    console.log('prospect', context.current.prospect.id)
+    console.log('path', path)
+    extensibilitySdk.navigate(path, `${prospectId}/apps/alex-test-20230428`)
   }
 
   return (
     <div>
-      <button onClick={handleRedirect('prospects')}>Prospects</button>
-      <button onClick={handleRedirect('accounts')}>Accounts</button>
+      <button onClick={handleRedirect(NavigationDestination.PROSPECT)}>Prospects</button>
+      <button onClick={handleRedirect(NavigationDestination.ACCOUNT)}>Accounts</button>
     </div>
   )
 }
